@@ -22,16 +22,8 @@ A fully functional, beautifully designed poll creator app built with vanilla HTM
 
 ## Screenshots
 
-````carousel
-![Create Poll view](file:///C:/Users/Asus/.gemini/antigravity/brain/7aa31629-780d-4e8a-92ab-178bb3db2d05/create_poll_initial_state_1773067946117.png)
-<!-- slide -->
-![Share modal after publishing](file:///C:/Users/Asus/.gemini/antigravity/brain/7aa31629-780d-4e8a-92ab-178bb3db2d05/poll_published_modal_1773068045614.png)
-<!-- slide -->
-![Voting page](file:///C:/Users/Asus/.gemini/antigravity/brain/7aa31629-780d-4e8a-92ab-178bb3db2d05/voting_page_1773068069431.png)
-<!-- slide -->
-![Results with animated bars](file:///C:/Users/Asus/.gemini/antigravity/brain/7aa31629-780d-4e8a-92ab-178bb3db2d05/voting_results_page_1773068101075.png)
-<!-- slide -->
-![My Polls dashboard](file:///C:/Users/Asus/.gemini/antigravity/brain/7aa31629-780d-4e8a-92ab-178bb3db2d05/my_polls_grid_1773068125143.png)
+<img width="1905" height="1078" alt="image" src="https://github.com/user-attachments/assets/1f425e46-374d-4836-b802-3ad8e627bcca" />
+
 ````
 
 ## Session Recording
