@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PollCraft – Create & Share Polls</title>
+  <meta name="description" content="PollCraft lets you create beautiful polls, share them instantly, and view live results with stunning charts." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Background Orbs -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo" id="logo-btn">
+        <div class="logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="3"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <span>PollCraft</span>
+      </div>
+      <nav class="header-nav">
+        <button class="nav-btn active" id="nav-create" onclick="showView('create')">Create</button>
+        <button class="nav-btn" id="nav-polls" onclick="showView('polls')">My Polls</button>
+      </nav>
+      <button class="btn-primary btn-sm" id="header-create-btn" onclick="startNewPoll()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        New Poll
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== VIEW: CREATE ===== -->
+  <main id="view-create" class="view active">
+    <div class="hero">
+      <div class="hero-badge">✨ Create in seconds</div>
+      <h1 class="hero-title">Build polls that <span class="gradient-text">people love</span></h1>
+      <p class="hero-sub">Craft engaging polls with multiple options, share a link, and watch live results roll in.</p>
+    </div>
+
+    <div class="creator-card card">
+      <!-- Poll Title -->
+      <div class="field-group">
+        <label class="field-label" for="poll-title">Poll Question</label>
+        <input
+          type="text"
+          id="poll-title"
+          class="field-input"
+          placeholder="e.g. What's your favourite programming language?"
+          maxlength="200"
+        />
+        <span class="char-counter" id="title-counter">0 / 200</span>
+      </div>
+
+      <!-- Options -->
+      <div class="field-group">
+        <label class="field-label">Options</label>
+        <div id="options-list" class="options-list"></div>
+        <button class="btn-ghost add-option-btn" id="add-option-btn" onclick="addOption()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add option
+        </button>
+      </div>
+
+      <!-- Settings Row -->
+      <div class="settings-row">
+        <div class="setting-item">
+          <label class="field-label" for="poll-type">Poll Type</label>
+          <select id="poll-type" class="field-select">
+            <option value="single">Single choice</option>
+            <option value="multi">Multiple choice</option>
+          </select>
+        </div>
+        <div class="setting-item">
+          <label class="field-label" for="poll-expires">Expires in</label>
+          <select id="poll-expires" class="field-select">
+            <option value="never">Never</option>
+            <option value="1h">1 hour</option>
+            <option value="24h">24 hours</option>
+            <option value="7d">7 days</option>
+          </select>
+        </div>
+        <div class="setting-item">
+          <label class="field-label">Show results</label>
+          <div class="toggle-row">
+            <label class="toggle">
+              <input type="checkbox" id="show-results-toggle" checked />
+              <span class="toggle-track"></span>
+            </label>
+            <span class="toggle-label" id="results-toggle-label">After voting</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Color Theme -->
+      <div class="field-group">
+        <label class="field-label">Color Theme</label>
+        <div class="theme-swatches">
+          <button class="swatch active" data-theme="violet" style="--c:#7c3aed" title="Violet"></button>
+          <button class="swatch" data-theme="sky" style="--c:#0ea5e9" title="Sky"></button>
+          <button class="swatch" data-theme="rose" style="--c:#f43f5e" title="Rose"></button>
+          <button class="swatch" data-theme="emerald" style="--c:#10b981" title="Emerald"></button>
+          <button class="swatch" data-theme="amber" style="--c:#f59e0b" title="Amber"></button>
+          <button class="swatch" data-theme="pink" style="--c:#ec4899" title="Pink"></button>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="card-actions">
+        <button class="btn-ghost" onclick="previewPoll()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Preview
+        </button>
+        <button class="btn-primary" id="publish-btn" onclick="publishPoll()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Publish Poll
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== VIEW: MY POLLS ===== -->
+  <main id="view-polls" class="view">
+    <div class="section-header">
+      <h2 class="section-title">My Polls</h2>
+      <p class="section-sub">Manage and track all your created polls</p>
+    </div>
+    <div id="polls-grid" class="polls-grid"></div>
+    <div id="polls-empty" class="empty-state hidden">
+      <div class="empty-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <h3>No polls yet</h3>
+      <p>Create your first poll to get started</p>
+      <button class="btn-primary" onclick="showView('create')">Create a Poll</button>
+    </div>
+  </main>
+
+  <!-- ===== VIEW: VOTE ===== -->
+  <main id="view-vote" class="view">
+    <div class="vote-container">
+      <div class="card vote-card">
+        <div class="poll-theme-bar" id="vote-theme-bar"></div>
+        <div class="vote-header">
+          <div class="vote-badge" id="vote-badge">Live Poll</div>
+          <h2 class="vote-title" id="vote-title"></h2>
+          <p class="vote-meta" id="vote-meta"></p>
+        </div>
+        <div id="vote-options" class="vote-options"></div>
+        <div class="vote-actions">
+          <button class="btn-ghost" onclick="goBack()">← Back</button>
+          <button class="btn-primary" id="submit-vote-btn" onclick="submitVote()" disabled>Submit Vote</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== VIEW: RESULTS ===== -->
+  <main id="view-results" class="view">
+    <div class="results-container">
+      <div class="card results-card">
+        <div class="poll-theme-bar" id="results-theme-bar"></div>
+        <div class="results-header">
+          <h2 class="results-title" id="results-title"></h2>
+          <div class="results-stats">
+            <div class="stat-pill" id="results-total-votes"></div>
+            <div class="stat-pill" id="results-poll-type"></div>
+          </div>
+        </div>
+        <div id="results-bars" class="results-bars"></div>
+        <div class="results-actions">
+          <button class="btn-ghost" onclick="goBack()">← Back</button>
+          <button class="btn-ghost" id="copy-link-btn" onclick="copyPollLink()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            Copy Link
+          </button>
+          <button class="btn-primary" onclick="votePoll(currentResultPollId)">Vote Again</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== MODAL: Share ===== -->
+  <div class="modal-overlay hidden" id="share-modal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeShareModal()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="modal-icon">🎉</div>
+      <h3 class="modal-title">Poll Published!</h3>
+      <p class="modal-sub">Share your poll with others</p>
+      <div class="share-link-box">
+        <input type="text" class="share-link-input" id="share-link-input" readonly />
+        <button class="btn-primary btn-sm" id="copy-btn" onclick="copyShareLink()">Copy</button>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-ghost" onclick="closeShareModal(); votePoll(lastPublishedId)">Vote Now</button>
+        <button class="btn-primary" onclick="closeShareModal(); showView('polls')">View My Polls</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
