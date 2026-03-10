@@ -52,6 +52,7 @@ PollCraft is a beautiful, interactive poll creator web application built with va
 
 ## Session Recording
 
+![Recording 2026-03-10 184615 (1) (1)](https://github.com/user-attachments/assets/3478bfcb-cc80-499d-aaa6-eaac68b80798)
 
 ## 🚀 Getting Started
 
